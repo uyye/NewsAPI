@@ -22,10 +22,10 @@ export const getHeadlinesByCategory = async({category, pageSize, page, filter}:{
     return data
 }
 
-export const getArticlesDetail = async({title}:{title:string})=>{
+export const getArticlesDetail = async({title, category}:{title:string, category?:string})=>{
     const {data} = await apiClient({
         method:'get',
-        url:`/news/detail?title=${title}`
+        url:`/news/detail?title=${title}&category=${category}`
     })
     return data
 }

@@ -5,6 +5,6 @@ const router = express.Router()
 router.get('/', NewsController.getNews)
 router.get('/headlines', NewsController.headlinesNews)
 router.get('/headlines/:category', NewsController.getNewsByCategory)
-router.get('/detail/:title', NewsController.getNewsDetail)
+router.get('/detail', NewsController.getNewsDetail)
 
 module.exports = router

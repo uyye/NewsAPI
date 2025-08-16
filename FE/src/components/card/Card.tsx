@@ -5,7 +5,7 @@ import type { Article } from "../../type";
 export default function Card({ article , category }: { article: Article, category?: string }) {
 
   return (
-    <Link to={`/news/${category}/${article.title}`}>
+    <Link to={`/news/${category}/${encodeURIComponent(article.title) }`}>
       <div className="max-w-[300px] max-h-[432px] h-fit gap-4 flex flex-col">
       <div className="h-[200px] w-full">
         <img

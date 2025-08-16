@@ -1,5 +1,4 @@
 const axios = require("axios");
-const { json } = require("express");
 const apiKey = process.env.apiKey;
 
 class NewsController {
@@ -61,20 +60,29 @@ class NewsController {
 
  static async getNewsDetail(req, res, next) {
   try {
-    const { title } = req.params;
+    const { title, category } = req.query;
 
     const { data } = await axios.get(
-      `https://newsapi.org/v2/top-headlines?q=${encodeURIComponent(title)}&language=en&apiKey=${apiKey}`
+      `https://newsapi.org/v2/top-headlines`,
+      {
+        params:{
+          apiKey,
+          q: title,
+          language:'en',
+          category
+        }
+      }
     );
 
-    const news = data.articles.find(
-      (a) => a.title.toLowerCase() === decodeURIComponent(title).toLowerCase()
-    );
+  const news = data.articles.find(article => {
+    return article.title === title
+  });
+    
 
     if (!news) {
       return res.status(404).json({ message: "Article not found" });
     }
-
+    
     res.status(200).json(news);
   } catch (error) {
     console.error(error);

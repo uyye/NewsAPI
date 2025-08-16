@@ -2,15 +2,14 @@ import { useEffect, useState } from "react"
 import type { Article } from "../../../type"
 import { getArticlesDetail } from "../service"
 
-const useArticle = (title:string) : {data:Article, loading:boolean} =>{
+const useArticle = (title:string, category?:string) : {data:Article, loading:boolean} =>{
     const [data, setData] = useState<Article>({} as Article)
     const [loading, setLoading] = useState<boolean>(true)
 
     const fetchArticle = async ()=>{
+        if(category === 'headlines') category = ""
         try {
-            const response = await getArticlesDetail({title})
-            console.log(response);
-            
+            const response = await getArticlesDetail({title, category})
             setData(response)
         } catch (error) {
             console.log(error)
@@ -21,7 +20,7 @@ const useArticle = (title:string) : {data:Article, loading:boolean} =>{
 
     useEffect(()=>{
         fetchArticle()
-    },[title])
+    },[title, category])
 
     return {data, loading}
 }

@@ -66,7 +66,7 @@ export default function ListNews() {
                 ) : (
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
                     {_headlineSport?.map((article, index) => (
-                      <Card key={index} article={article} />
+                      <Card key={index} article={article} category="sport" />
                     ))}
                   </div>
                 )}
@@ -79,7 +79,7 @@ export default function ListNews() {
                 ) : (
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
                     {_headlineBussines?.map((article, index) => (
-                      <Card key={index} article={article} />
+                      <Card key={index} article={article} category="business" />
                     ))}
                   </div>
                 )}
@@ -95,7 +95,7 @@ export default function ListNews() {
                 ) : (
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
                     {_headlineEntertainment?.map((article, index) => (
-                      <Card key={index} article={article} />
+                      <Card key={index} article={article} category="entertainment" />
                     ))}
                   </div>
                 )}
@@ -108,7 +108,7 @@ export default function ListNews() {
                 ) : (
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
                     {_headlineTechnology?.map((article, index) => (
-                      <Card key={index} article={article} />
+                      <Card key={index} article={article} category="technology" />
                     ))}
                   </div>
                 )}

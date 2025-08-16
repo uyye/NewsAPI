@@ -7,8 +7,8 @@ import Card from "../../components/card/Card";
 import { Skeleton } from "antd";
 
 export default function DetailNews() {
-  const { title, category="" } = useParams<{ title: string, category:string }>();
-  const { data: _article, loading: _loading } = useArticle(title || "");
+  const { title="", category="" } = useParams<{ title: string, category:string }>();
+  const { data: _article, loading: _loading } = useArticle(title, category);
   const pageSize = 3;
   const {
     data: _sameContent,
@@ -31,7 +31,7 @@ export default function DetailNews() {
               {formatDate(_article?.publishedAt)} . Created by{" "}
               {_article?.source?.name}
             </p>
-            <p className="text-3xl">{_article.title}</p>
+            <p className="text-3xl">{_article?.title}</p>
           </div>
 
           {/* image */}
@@ -42,10 +42,10 @@ export default function DetailNews() {
           />
 
           {/* conten -desc */}
-          <NewsContent htmlContent={_article.content} />
+          <NewsContent htmlContent={_article?.content} />
           <span>
             <a
-            href={_article.url}
+            href={_article?.url}
             target="_blank"
             rel="noopener noreferrer"
             className="text-blue-600 hover:underline inline-block"
