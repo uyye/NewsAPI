@@ -15,6 +15,9 @@ export default function DetailNews() {
     totalResults: _totalResults,
   } = useHeadlinesCetgory(category, pageSize);
   
+  console.log(category, "CEK NILAI KATEGORI");
+  
+
   return (
     <div className=" z-0 top-[96px]">
       {/* content */}
@@ -53,7 +56,9 @@ export default function DetailNews() {
       </div>
 
       {/* same category */}
-      <div className=" relative w-full pt-10 pb-[200px] md:px-[180px] px-5 gap-[60px]">
+      {
+        category !== 'headlines' &&
+        <div className=" relative w-full pt-10 pb-[200px] md:px-[180px] px-5 gap-[60px]">
         <div className="w-full max-w-[1080px] mx-auto gap-6 flex flex-col">
           <p className="font-bold text-xl">Other article</p>
           <div className="grid md:grid-cols-3 grid-cols-1 gap-10">
@@ -63,6 +68,8 @@ export default function DetailNews() {
           </div>
         </div>
       </div>
+      }
+      
     </div>
   );
 }
