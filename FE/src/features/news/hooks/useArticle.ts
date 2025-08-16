@@ -1,4 +1,4 @@
-import { use, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import type { Article } from "../../../type"
 import { getArticlesDetail } from "../service"
 

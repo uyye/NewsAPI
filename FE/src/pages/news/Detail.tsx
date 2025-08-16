@@ -4,6 +4,7 @@ import formatDate from "../../helpers/formatDate";
 import NewsContent from "../../components/content/NewsContent";
 import useHeadlinesCetgory from "../../features/news/hooks/useHeadlineCategory";
 import Card from "../../components/card/Card";
+import { Skeleton } from "antd";
 
 export default function DetailNews() {
   const { title, category="" } = useParams<{ title: string, category:string }>();
@@ -14,15 +15,16 @@ export default function DetailNews() {
     loading: _loadingSameContent,
     totalResults: _totalResults,
   } = useHeadlinesCetgory(category, pageSize);
-  
-  console.log(category, "CEK NILAI KATEGORI");
-  
 
   return (
     <div className=" z-0 top-[96px]">
       {/* content */}
       <div className="w-full md:px-[160px] px-5 py-10  gap-[60px]">
-        <div className="gap-10 max-w-[1120px] mx-auto flex flex-col">
+        {
+          _loading ? (
+            <Skeleton active paragraph={{rows: 10}}/>
+          ):(
+            <div className="gap-10 max-w-[1120px] mx-auto flex flex-col">
           {/* head content */}
           <div className="flex flex-col justify-center items-center gap-4">
             <p className="text-sm font-medium">
@@ -53,6 +55,8 @@ export default function DetailNews() {
           </span>
            
         </div>
+          )
+        }
       </div>
 
       {/* same category */}
@@ -62,9 +66,16 @@ export default function DetailNews() {
         <div className="w-full max-w-[1080px] mx-auto gap-6 flex flex-col">
           <p className="font-bold text-xl">Other article</p>
           <div className="grid md:grid-cols-3 grid-cols-1 gap-10">
-            {_sameContent?.map((article, index) => (
-              <Card key={index} article={article} />
-            ))}
+            {_loadingSameContent ? (
+              Array(pageSize).fill(null).map((_, i) => (
+                <Skeleton key={i} active avatar paragraph={{ rows: 3 }} />
+              ))
+            ) :(
+              _sameContent?.map((article, index) => (
+                <Card key={index} article={article} category={category} />
+              ))
+            )
+          }
           </div>
         </div>
       </div>

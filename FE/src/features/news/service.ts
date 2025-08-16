@@ -25,7 +25,7 @@ export const getHeadlinesByCategory = async({category, pageSize, page, filter}:{
 export const getArticlesDetail = async({title}:{title:string})=>{
     const {data} = await apiClient({
         method:'get',
-        url:`/news/detail/${title}`
+        url:`/news/detail?title=${title}`
     })
     return data
 }

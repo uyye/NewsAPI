@@ -4,6 +4,7 @@ import Card from "../../components/card/Card";
 import Pages from "../../components/pagination/Pagination";
 import { useEffect, useState } from "react";
 import SearchInput from "../../components/input/Search";
+import { Skeleton } from "antd";
 
 export default function CategoryPage() {
   const { category = "general" } = useParams<{ category: string }>();
@@ -47,9 +48,14 @@ export default function CategoryPage() {
         {/* News Cards */}
         <div className="w-full gap-[40px] md:gap-[60px] mx-auto">
           <div className="w-full gap-6 md:gap-10 grid sm:grid-cols-2 md:grid-cols-3 grid-cols-1">
-            {_article?.map((article, index) => (
+            {_loading ? (
+              Array(pageSize).fill(null).map((_, i) => (
+                <Skeleton key={i} active avatar paragraph={{ rows: 3 }} />
+              ))
+            ) :
+            _article?.map((article, index) => (
               <Card key={index} article={article} category={category} />
-            ))}
+            ))} 
           </div>
         </div>
 
